@@ -3595,3 +3595,56 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+.cross-sell-wrapper {
+  position: relative;
+}
+.cross-sell-nav {
+  position: absolute;
+  top: 48%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.cross-sell-scroll {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cross-sell-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.cross-sell-scroll > div {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 200px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+}
+.cross-sell-arrow {
+  background-color: rgb(var(--color-foreground));
+  width: 2rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border: 0;
+  justify-content: center;
+  color: #fff;
+}
+button#cross-sell-prev {
+  left: -13px;
+  position: relative;
+}
+button#cross-sell-next {
+  right: -13px;
+  position: relative;
+}

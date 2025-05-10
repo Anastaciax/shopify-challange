@@ -335,7 +335,13 @@
           "collection": {
             "label": "Collection",
             "info": "Shown when cart drawer is empty"
-          }
+          },
+          "cross_sell_heading": {
+          "label": "Cross-sell heading"
+        },
+        "cross_sell_product_limit": {
+          "label": "Number of products to show"
+        }
         }
       }
     },

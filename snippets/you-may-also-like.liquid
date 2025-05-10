@@ -1,0 +1,23 @@
+{%- if cart.item_count > 0 -%}
+  <div
+    id="cross-sell-container"
+    class="cross-sell-wrapper"
+    data-max-products="{{ settings.cart_drawer_cross_sell_product_limit | default: 4 }}"
+    data-fill-random="{{ settings.cart_drawer_cross_sell_fill_random }}"
+    data-fallback-handle="{{ settings.cart_drawer_collection }}"
+  >
+    <h2 class="cross-sell-heading">
+      {{ settings.cart_drawer_cross_sell_heading | default: 'You may also like' }}
+    </h2>
+
+    <div class="cross-sell-wrapper">
+      <div class="cross-sell-scroll" id="cross-sell-scroll"></div>
+
+      <div class="cross-sell-nav">
+        <button class="cross-sell-arrow" id="cross-sell-prev" type="button" aria-label="Previous">&larr;</button>
+        <div class="cross-sell-dots" id="cross-sell-dots"></div>
+        <button class="cross-sell-arrow" id="cross-sell-next" type="button" aria-label="Next">&rarr;</button>
+      </div>
+    </div>
+  </div>
+{%- endif -%}

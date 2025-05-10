@@ -1445,6 +1445,27 @@
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
       },
       {
+        "type": "text",
+        "id": "cart_drawer_cross_sell_heading",
+        "label": "t:settings_schema.cart.settings.cart_drawer.cross_sell_heading.label",
+        "default": "You may also like"
+      },
+      {
+        "type": "range",
+        "id": "cart_drawer_cross_sell_product_limit",
+        "label": "t:settings_schema.cart.settings.cart_drawer.cross_sell_product_limit.label",
+        "min": 2,
+        "max": 10,
+        "step": 1,
+        "default": 4
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_drawer_cross_sell_fill_random",
+        "label": "Fill to limit with products from the fallback collection",
+        "default": true
+      },
+      {
         "type": "color_scheme",
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
@@ -1452,4 +1473,5 @@
       }
     ]
   }
+  
 ]

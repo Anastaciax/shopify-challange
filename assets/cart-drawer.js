@@ -6,7 +6,7 @@ class CartDrawer extends HTMLElement {
     this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this));
     this.setHeaderCartIconAccessibility();
   }
-
+  
   setHeaderCartIconAccessibility() {
     const cartLink = document.querySelector('#cart-icon-bubble');
     if (!cartLink) return;
@@ -69,25 +69,45 @@ class CartDrawer extends HTMLElement {
 
     cartDrawerNote.parentElement.addEventListener('keyup', onKeyUpEscape);
   }
+  renderContents(parsedState) 
+  {
+    this.savedCrossSell = document.getElementById('cross-sell-container');
 
-  renderContents(parsedState) {
-    this.querySelector('.drawer__inner').classList.contains('is-empty') &&
-      this.querySelector('.drawer__inner').classList.remove('is-empty');
-    this.productId = parsedState.id;
-    this.getSectionsToRender().forEach((section) => {
-      const sectionElement = section.selector
-        ? document.querySelector(section.selector)
-        : document.getElementById(section.id);
-
-      if (!sectionElement) return;
-      sectionElement.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
-    });
-
-    setTimeout(() => {
-      this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this));
-      this.open();
-    });
-  }
+  
+      this.getSectionsToRender().forEach(function (section)
+      {
+          let sectionElement = section.selector
+              ? document.querySelector(section.selector)
+              : document.getElementById(section.id);
+  
+          if (!sectionElement) { return; }
+  
+          let html = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
+  
+          if (this.savedCrossSell && section.id === 'cart-drawer')
+          {
+              let tmp = document.createElement('div');
+              tmp.innerHTML = html;
+  
+              let freshBlock = tmp.querySelector('#cross-sell-container');
+              if (freshBlock)
+              {
+                  freshBlock.replaceWith(this.savedCrossSell);
+              }
+  
+              sectionElement.innerHTML = tmp.innerHTML;
+          }
+          else
+          {
+              sectionElement.innerHTML = html;
+          }
+      }.bind(this));
+  
+      setTimeout(() => {
+          this.querySelector('#CartDrawer-Overlay')              .addEventListener('click', this.close.bind(this));
+          this.open();
+        });
+      }
 
   getSectionInnerHTML(html, selector = '.shopify-section') {
     return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
@@ -131,6 +151,20 @@ class CartDrawerItems extends CartItems {
       },
     ];
   }
+
+  // getSectionInnerHTML(html, selector) {
+  //   let parser = new DOMParser();
+  //   let doc = parser.parseFromString(html, 'text/html');
+
+  //   let savedCrossSell = document.getElementById('cross-sell-container');
+  //   let incomingContainer = doc.querySelector('#cross-sell-container');
+
+  //   if (savedCrossSell && incomingContainer) {
+  //     incomingContainer.replaceWith(savedCrossSell);
+  //   }
+
+  //   return doc.querySelector(selector).innerHTML;
+  // }
 }
 
 customElements.define('cart-drawer-items', CartDrawerItems);
